@@ -1,0 +1,132 @@
+name: "Architecture / Docs Task"
+description: "Planning, architecture, standards, or documentation work"
+title: "[Docs] "
+labels:
+  - "type:docs"
+  - "status:ready"
+body:
+  - type: dropdown
+    id: repo_owner
+    attributes:
+      label: Repo Owner
+      description: Single repo owner only. Split into parent/child issues if multiple repos are needed.
+      options:
+              - ai-orchestrator
+              - discord-bot
+              - engineering-planning
+              - agm-legacy
+              - company-website
+              - customer-frontend
+              - manager-frontend
+              - platform-api
+              - platform-infra
+              - platform-shared
+    validations:
+      required: true
+
+  - type: dropdown
+    id: assigned_agent
+    attributes:
+      label: Assigned Agent
+      description: Select the agent that should own execution or review.
+      options:
+              - agent:orchestrator
+              - agent:discord-bot
+              - agent:api
+              - agent:customer-frontend
+              - agent:manager-frontend
+              - agent:website
+              - agent:shared
+              - agent:legacy
+              - agent:devops
+              - agent:qa
+    validations:
+      required: true
+
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: Clear statement of what this issue is trying to accomplish.
+      placeholder: Describe the outcome, not implementation noise.
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Context, current behavior, desired behavior, and why this repo owns the change.
+      placeholder: Include any legacy coupling, API, or contract context that matters.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance Criteria
+      description: Must be testable and specific.
+      placeholder: |
+        - [ ]
+        - [ ]
+        - [ ]
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: Parent tickets, child tickets, blocking tickets, contract dependencies, rollout dependencies.
+      placeholder: None, or list exact issue links / docs / release dependencies.
+    validations:
+      required: true
+
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks
+      description: What could break, drift, or create coupling if done poorly?
+      placeholder: Include architecture, auth, billing, migration, infra, data, and rollout risks.
+    validations:
+      required: true
+
+  - type: textarea
+    id: required_tests
+    attributes:
+      label: Required Tests
+      description: Do not leave this vague.
+      placeholder: |
+        - Unit:
+        - Integration:
+        - E2E:
+        - Manual Verification:
+        - Migration / Rollback Validation:
+    validations:
+      required: true
+
+  - type: textarea
+    id: out_of_scope
+    attributes:
+      label: Out of Scope
+      description: Protect against issue bloat and boundary drift.
+      placeholder: Explicitly list what this issue must not absorb.
+    validations:
+      required: true
+
+
+  - type: textarea
+    id: source_of_truth
+    attributes:
+      label: Source of Truth Impact
+      placeholder: Which planning docs, boundaries, standards, or repo rules does this update touch?
+    validations:
+      required: true
+
+  - type: textarea
+    id: downstream_effect
+    attributes:
+      label: Downstream Effect
+      placeholder: Which repos, agents, or workflows need to change behavior because of this doc task?
+    validations:
+      required: true

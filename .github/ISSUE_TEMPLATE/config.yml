@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: AGM Orchestration Intake
+    url: https://github.com/
+    about: Use the structured intake template and create repo-scoped issues only.
