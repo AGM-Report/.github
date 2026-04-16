@@ -1,99 +1,53 @@
-# Pull Request Review Template
+# Pull Request
 
-## What Changed
+Use this PR body for the review request summary only.
 
-- Summary of the change:
-- Current behavior:
-- New behavior:
-- Why the change was needed:
+Do not paste the full completion report into the PR body.
+When implementation is complete, post the full completion report as a comment on:
+- the linked GitHub issue
+- this pull request
 
-## Why This Repo Owns It
+That completion report should follow the repo’s `## Completion Reporting — Required` instructions.
 
-- Repo owner:
-- Why this repository is the correct boundary:
-- Any nearby responsibilities that were deliberately left out:
-
-## Issue and Planning Links
+## Linked Issue
 
 - Primary issue:
 - Parent issue:
-- Child issues:
-- Related docs / planning refs:
+- Related issue(s):
 
-## Affected Contracts
+## Purpose
 
-- [ ] No contract changes
-- [ ] API contract changed
-- [ ] Shared type / schema changed
-- [ ] Response shape changed
-- [ ] Auth / permission behavior changed
-- [ ] Data / schema behavior changed
+- What this PR changes:
+- Why this change exists:
+- What repo-local responsibility this fulfills:
 
-### Contract Notes
-Describe exactly what changed, who consumes it, and whether compatibility is preserved.
+## Scope Alignment
 
-## Downstream Repos Affected
+- In scope:
+  - ...
+- Out of scope:
+  - ...
 
-- [ ] None
-- [ ] ai-orchestrator
-- [ ] discord-bot
-- [ ] engineering-planning
-- [ ] agm-legacy
-- [ ] company-website
-- [ ] customer-frontend
-- [ ] manager-frontend
-- [ ] platform-api
-- [ ] platform-infra
-- [ ] platform-shared
+## Files / Surfaces Changed
 
-### Downstream Impact Notes
-Explain any required follow-up PRs, release ordering, or compatibility constraints.
+- ...
+- ...
 
-## Tests Run
+## Validation Summary
 
-- Unit:
-- Integration:
-- E2E:
-- Manual Verification:
-- Migration / Rollback Validation:
+- CI summary:
+- Manual / runtime validation summary:
+- What was not validated yet:
 
-## Screenshots / UI Evidence
+## Risks
 
-For frontend work, include before/after screenshots or short screen recordings.
+- ...
 
-## Manual Verification Steps
+## Rollback / Disable Summary
 
-1.
-2.
-3.
+- How to roll back or disable this safely:
+- Any config, contract, or data caveats:
 
-## Rollback Notes
+## Open Gaps
 
-- How to roll back:
-- What would need to be reverted:
-- Any schema / data / config risks:
-- Can this be disabled without revert?: yes | no
-
-## Migration Notes
-
-- Is this preserving legacy behavior during extraction?: yes | no
-- Any temporary adapters or compatibility shims?:
-- Any known blockers still remaining?:
-- Does this reduce coupling, preserve it temporarily, or create new coupling?:
-
-## Deployment / Release Notes
-
-- Can this ship alone?: yes | no
-- Required release order:
-- Staging soak required?: yes | no
-- Rollback rehearsal required?: yes | no
-- Env / secret changes required?: yes | no
-
-## Boundary Check
-
-- [ ] No business logic was introduced into a frontend repo
-- [ ] No direct DB access was introduced outside backend ownership
-- [ ] No shared repo convenience abstraction was added without justification
-- [ ] No hidden cross-repo dependency was introduced
-- [ ] Acceptance criteria from the issue are satisfied
-- [ ] Required tests from the issue are satisfied
+- None.
