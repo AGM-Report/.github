@@ -1,0 +1,19 @@
+name: PR Baseline
+
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+      - ready_for_review
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  pr-baseline-checks:
+    uses: AGM-Report/platform-infra/.github/workflows/reusable-pr-baseline.yml@main
+    secrets: inherit
