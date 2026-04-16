@@ -15,5 +15,4 @@ permissions:
 
 jobs:
   pr-baseline-checks:
-    uses: AGM-Report/platform-infra/.github/workflows/reusable-pr-baseline.yml@main
-    secrets: inherit
+    uses: ./.github/workflows/reusable-pr-baseline.yml
