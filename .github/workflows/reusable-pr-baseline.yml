@@ -1,0 +1,79 @@
+name: reusable-pr-baseline
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  pr-baseline-checks:
+    name: pr-baseline-checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Validate pull request body sections
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            if (!pr) {
+              core.setFailed('This reusable workflow must be called from a pull_request event.');
+              return;
+            }
+
+            const body = pr.body || '';
+
+            const requiredSections = [
+              '## Linked Issue',
+              '## Purpose',
+              '## Scope Alignment',
+              '## Files / Surfaces Changed',
+              '## Validation Summary',
+              '## Risks',
+              '## Rollback / Disable Summary',
+              '## Open Gaps'
+            ];
+
+            const missingSections = requiredSections.filter(section => !body.includes(section));
+
+            if (missingSections.length > 0) {
+              core.setFailed(
+                [
+                  'Pull request body is missing required section(s):',
+                  ...missingSections.map(section => `- ${section}`),
+                  '',
+                  'Use the organization PR template and keep the full completion report in comments, not the PR body.'
+                ].join('\n')
+              );
+              return;
+            }
+
+            const primaryIssueLine = body
+              .split('\n')
+              .find(line => /^\-\s*Primary issue:/i.test(line) || /^\-\s*Issue:/i.test(line));
+
+            if (!primaryIssueLine) {
+              core.setFailed(
+                'Pull request body must include a linked issue entry under `## Linked Issue`.'
+              );
+              return;
+            }
+
+            const linkedIssueValue = primaryIssueLine.replace(/^\-\s*(Primary issue|Issue):[ \t]*/i, '').trim();
+
+            if (!linkedIssueValue) {
+              core.setFailed(
+                'Pull request body must include a linked issue entry under `## Linked Issue`.'
+              );
+              return;
+            }
+
+            const openGapsMatch = body.match(/## Open Gaps([\s\S]*)$/i);
+            if (!openGapsMatch || openGapsMatch[1].trim() === '') {
+              core.setFailed('`## Open Gaps` must contain a value, even if it is `- None.`');
+              return;
+            }
+
+            core.notice('Pull request body satisfies baseline review-template requirements.');
